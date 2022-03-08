@@ -1,0 +1,110 @@
+Grocery App
+
+Features 
+Likes
+Posts
+Comments
+Shares
+Groups
+Recipes
+Ingredients
+
+
+USER STORIES 
+User can log into app with email and password
+User can join groups depending on what they like to cook or bake
+User can look up recipes by category
+User can add comments to tweak recipes
+User can add ingredients to a list for buying at the store
+User can add their own recipes to share or make it only available to a certain group
+
+TABLE IDEAS
+Users
+Hold information about our users
+Recipes
+Hold information related to recipes, content, pictures, videos, etc
+Post/comments
+Hold info about posts made by users, content, pictures
+-  Grocery list
+   -   Holds information related to recipes.
+
+RELATIONSHIPS
+	- One to one
+		-Users to authorization
+	-One to many
+		-Users to posts
+		-Users to shares listings
+	
+	-Many to many
+		-Comments to post
+		-Users to users
+
+COLUMNS
+
+User can login or register for the app
+	- id
+	-email
+		-verification
+	-username
+	-password
+	-profile pic
+	-first name/ last name
+	
+User can follow other users 
+	-friend or not a friend
+	-id
+
+Users can post comments
+	-user id
+	-post comment
+	-type
+
+User can add list to grocery list
+	-User id
+	-Listing id
+	-description
+	-category 
+	-status/ if they got the item or not
+
+CREATE TABLES
+
+	-- CREATE TABLE users(
+--   id SERIAL PRIMARY KEY,
+--   first_name VARCHAR(255),
+--   last_name VARCHAR(255),
+--   profile_pic TEXT,
+--   username VARCHAR(255),
+--   password TEXT 
+--   ); 
+
+CREATE TABLE recipes(
+  id SERIAL PRIMARY KEY,
+  recipe TEXT,
+  recipe_pic TEXT,
+  recipe_vid TEXT
+  );
+
+CREATE TABLE grocery_list(
+  recipe_id INTEGER NOT NULL REFERENCES recipes(id),
+  grocery_list TEXT
+  );
+
+CREATE TABLE comments(
+  comment_id SERIAL PRIMARY KEY,
+  post_id INT,
+  user_id INTEGER NOT NULL REFERENCES users(id),
+  comment_text TEXT
+  );
+  
+
+INSERT DATA
+
+INSERT INTO users (first_name, last_name, profile_pic, username, password)
+	VALUES ('Steve', 'Roger', 'http', 'Captforyou1', ‘usaalltheway')
+
+
+INSERT INTO recipes (recipe, recipe_pic, recipe_vid)
+	VALUES ('Meatloaf', 'meatloaf.jpg', ‘meatloaf.vid')
+
+INSERT INTO grocery_list (grocery_list)
+	VALUES ('sugar')
